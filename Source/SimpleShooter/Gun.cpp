@@ -56,7 +56,19 @@ void AGun::PullTrigger()
 	bool hitSuccess = GetWorld()->LineTraceSingleByChannel(Hit, Location, End, ECollisionChannel::ECC_GameTraceChannel1);
 
 	if (hitSuccess) {
-		DrawDebugPoint(GetWorld(), Hit.Location, 20, FColor::Red, true);
+		// Get Shot direction which is inverse of the rotation
+		FVector ShotDirection = -Rotation.Vector();
+		// Spawn particals at the hit location
+		UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ImpactEffect, Hit.Location, ShotDirection.Rotation());
+		// Hit actor 
+		AActor* HitActor = Hit.GetActor();
+		// If hits to actor
+		if (HitActor != nullptr) {
+			// Custom Point Damage Event for Acotr's TakeDamage function
+			FPointDamageEvent DamageEvent(Damage, Hit, ShotDirection, nullptr);
+			// Damage to HitActor
+			Hit.Actor->TakeDamage(Damage, DamageEvent, OwnerController, this);
+		}
 	}
 
 }
