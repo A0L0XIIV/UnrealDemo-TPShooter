@@ -16,6 +16,10 @@ AShooterCharacter::AShooterCharacter()
 void AShooterCharacter::BeginPlay()
 {
 	Super::BeginPlay();
+
+	// Initialize health
+	Health = MaxHealth;
+
 	// Create a gun actor
 	Gun = GetWorld()->SpawnActor<AGun>(GunClass);
 	// Hide character sheleton's gun bone
@@ -81,4 +85,15 @@ void AShooterCharacter::LookUp(float AxisValue)
 void AShooterCharacter::Shoot()
 {
 	Gun->PullTrigger();
+}
+
+float AShooterCharacter::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
+{
+	float DamageToApply = Super::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);
+	// Get the min of the Health or Damage
+	DamageToApply = FMath::Min(Health, DamageToApply);
+	// Decrease the health
+	Health -= DamageToApply;
+	UE_LOG(LogTemp, Warning, TEXT("Current Health: %f"), Health);
+	return DamageToApply;
 }
