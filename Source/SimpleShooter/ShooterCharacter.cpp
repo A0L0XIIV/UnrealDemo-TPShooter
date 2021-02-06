@@ -97,3 +97,8 @@ float AShooterCharacter::TakeDamage(float DamageAmount, FDamageEvent const& Dama
 	UE_LOG(LogTemp, Warning, TEXT("Current Health: %f"), Health);
 	return DamageToApply;
 }
+
+bool AShooterCharacter::IsDead() const
+{
+	return (Health <= 0);
+}
