@@ -25,6 +25,9 @@ public:
 
 	virtual float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser) override;
 
+	// Action
+	void Shoot();
+
 	UFUNCTION(BlueprintPure)
 		bool IsDead() const;
 
@@ -39,8 +42,6 @@ private:
 	// Controller move functions
 	void LookUpRate(float AxisValue);
 	void LookRightRate(float AxisValue);
-	// Action
-	void Shoot();
 
 	UPROPERTY(EditAnywhere)
 		float RotationRate = 10;
