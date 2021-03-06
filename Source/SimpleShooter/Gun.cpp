@@ -52,8 +52,13 @@ void AGun::PullTrigger()
 	FVector End = Location + Rotation.Vector() * MaxRange;
 
 	FHitResult Hit;
+	FCollisionQueryParams Params;
+	// Ignore gun while shooting
+	Params.AddIgnoredActor(this);
+	// Ignore gun's owner (actor) while shooting
+	Params.AddIgnoredActor(GetOwner());
 	// ECC_GameTraceChannel1 is our custom trace which is Bullet
-	bool hitSuccess = GetWorld()->LineTraceSingleByChannel(Hit, Location, End, ECollisionChannel::ECC_GameTraceChannel1);
+	bool hitSuccess = GetWorld()->LineTraceSingleByChannel(Hit, Location, End, ECollisionChannel::ECC_GameTraceChannel1, Params);
 
 	if (hitSuccess) {
 		// Get Shot direction which is inverse of the rotation
