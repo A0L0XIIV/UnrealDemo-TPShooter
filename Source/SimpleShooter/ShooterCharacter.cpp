@@ -98,11 +98,7 @@ float AShooterCharacter::TakeDamage(float DamageAmount, FDamageEvent const& Dama
 	Health -= DamageToApply;
 	UE_LOG(LogTemp, Warning, TEXT("Current Health: %f"), Health);
 
-	if (IsDead()) {
-		// Detach controller from character when it's dead
-		DetachFromControllerPendingDestroy();
-		// Make characters capsule colision disabled
-		GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	if (IsDead()) {		
 		// Get the game mode
 		ASimpleShooterGameModeBase* GameMode = GetWorld()->GetAuthGameMode<ASimpleShooterGameModeBase>();
 		// Null check
@@ -110,6 +106,10 @@ float AShooterCharacter::TakeDamage(float DamageAmount, FDamageEvent const& Dama
 			// Call PawnKilled function
 			GameMode->PawnKilled(this);
 		}
+		// Detach controller from character when it's dead
+		DetachFromControllerPendingDestroy();
+		// Make characters capsule colision disabled
+		GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	}
 
 	return DamageToApply;
