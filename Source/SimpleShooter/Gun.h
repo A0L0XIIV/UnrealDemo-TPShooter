@@ -18,13 +18,14 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	void PullTrigger();
+	virtual void PullTrigger();
+
+	AController* GetOwnerController() const;
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
-private:
 	UPROPERTY(VisibleAnywhere)
 		USceneComponent* Root;
 
@@ -48,8 +49,4 @@ private:
 
 	UPROPERTY(EditAnywhere)
 		float Damage = 10;
-
-	bool GunTrace(FHitResult& Hit, FVector &ShotDirection);
-
-	AController* GetOwnerController() const;
 };
