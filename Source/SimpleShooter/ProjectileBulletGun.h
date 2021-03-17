@@ -16,10 +16,11 @@ class SIMPLESHOOTER_API AProjectileBulletGun : public AGun
 public:
 	// Sets default values for this actor's properties
 	AProjectileBulletGun();
-
+	// Pull trigger function for projectile guns
 	virtual void PullTrigger() override;
 
 private:
+	// Components
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
 		USceneComponent* ProjectileSpawnPoint;
 

@@ -28,6 +28,7 @@ AProjectileBase::AProjectileBase()
 	InitialLifeSpan = 3.0f; // 3 Seconds, then destroy
 }
 
+
 // Called when the game starts or when spawned
 void AProjectileBase::BeginPlay()
 {
@@ -35,6 +36,7 @@ void AProjectileBase::BeginPlay()
 
 	UGameplayStatics::PlaySoundAtLocation(this, LaunchSound, GetActorLocation());
 }
+
 
 void AProjectileBase::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, FVector NormalImpulse, const FHitResult& Hit) {
 	// Get the owner class
@@ -51,8 +53,11 @@ void AProjectileBase::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UP
 		FPointDamageEvent DamageEvent(Damage, Hit, GetOwner()->GetActorLocation(), nullptr);
 		// Get the owner controlelr to damage
 		AController* OwnerController = Cast<AGun>(GetOwner())->GetOwnerController();
-		// Damage to HitActor
-		Hit.Actor->TakeDamage(Damage, DamageEvent, OwnerController, this);
+		// Do not damage itself
+		if (Hit.Actor != MyOwner) {
+			// Damage to HitActor
+			Hit.Actor->TakeDamage(Damage, DamageEvent, OwnerController, this);
+		}
 
 		// Show Hit particles at the hit location
 		UGameplayStatics::SpawnEmitterAtLocation(this, HitParticle, GetActorLocation());
@@ -62,19 +67,4 @@ void AProjectileBase::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UP
 		/*GetWorld()->GetFirstPlayerController()->ClientPlayCameraShake(HitShake);*/
 		Destroy();
 	}
-
-
-	/*
-	// Hit actor 
-	AActor* HitActor = Hit.GetActor();
-	// If hits to actor
-	if (HitActor != nullptr) {
-		// Custom Point Damage Event for Acotr's TakeDamage function
-		FPointDamageEvent DamageEvent(Damage, Hit, ShotDirection, nullptr);
-		// Get the owner controlelr to damage
-		AController* OwnerController = GetOwnerController();
-		// Damage to HitActor
-		Hit.Actor->TakeDamage(Damage, DamageEvent, OwnerController, this);
-	}
-	*/
 }

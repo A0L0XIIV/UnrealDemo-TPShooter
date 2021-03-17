@@ -34,10 +34,9 @@ bool ALineTraceGun::GunTrace(FHitResult& Hit, FVector& ShotDirection)
 
 void ALineTraceGun::PullTrigger()
 {
-	/*// Spawn muzzle flash particle effect and sound at the gun, it is attached so particles moves with gun
-	UGameplayStatics::SpawnEmitterAttached(MuzzleFlash, Mesh, TEXT("MuzzleFlashSocket"));
-	UGameplayStatics::SpawnSoundAttached(MuzzleSound, Mesh, TEXT("MuzzleFlashSocket"));*/
-
+	// Call Gun class's pull trigger for muzzle and sound effects
+	Super::PullTrigger();
+	// Variables
 	FHitResult Hit;
 	FVector ShotDirection;
 	bool bSuccess = GunTrace(Hit, ShotDirection);

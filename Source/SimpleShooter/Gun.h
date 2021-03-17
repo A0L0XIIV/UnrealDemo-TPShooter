@@ -17,15 +17,15 @@ public:
 
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-
+	// Pull trigger function for all guns
 	virtual void PullTrigger();
-
+	// Get owner of the gun which is the shooter character
 	AController* GetOwnerController() const;
 
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
-
+	// Components
 	UPROPERTY(VisibleAnywhere)
 		USceneComponent* Root;
 
@@ -44,8 +44,9 @@ protected:
 	UPROPERTY(EditAnywhere)
 		USoundBase* ImpactSound;
 
+	// Variables
 	UPROPERTY(EditAnywhere)
-		float MaxRange = 1000;
+		float MaxRange = 5000;
 
 	UPROPERTY(EditAnywhere)
 		float Damage = 10;

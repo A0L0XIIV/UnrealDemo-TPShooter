@@ -15,11 +15,10 @@ class SIMPLESHOOTER_API ALineTraceGun : public AGun
 public:
 	// Sets default values for this actor's properties
 	ALineTraceGun() : AGun() {};
-
+	// Pull trigger function for line traced guns
 	virtual void PullTrigger() override;
 
-
 private:
-
+	// Line Trace function
 	bool GunTrace(FHitResult& Hit, FVector& ShotDirection);
 };
