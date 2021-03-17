@@ -33,8 +33,6 @@ AProjectileBase::AProjectileBase()
 void AProjectileBase::BeginPlay()
 {
 	Super::BeginPlay();
-
-	UGameplayStatics::PlaySoundAtLocation(this, LaunchSound, GetActorLocation());
 }
 
 
@@ -60,9 +58,9 @@ void AProjectileBase::OnHit(UPrimitiveComponent* HitComp, AActor* OtherActor, UP
 		}
 
 		// Show Hit particles at the hit location
-		UGameplayStatics::SpawnEmitterAtLocation(this, HitParticle, GetActorLocation());
+		UGameplayStatics::SpawnEmitterAtLocation(this, ImpactEffect, GetActorLocation());
 		// Play Hit sound at the hit location
-		UGameplayStatics::PlaySoundAtLocation(this, HitSound, GetActorLocation());
+		UGameplayStatics::PlaySoundAtLocation(this, ImpactSound, GetActorLocation());
 		// Play camera shake
 		/*GetWorld()->GetFirstPlayerController()->ClientPlayCameraShake(HitShake);*/
 		Destroy();

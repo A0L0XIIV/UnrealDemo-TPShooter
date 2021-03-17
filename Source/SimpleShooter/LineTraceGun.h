@@ -19,6 +19,13 @@ public:
 	virtual void PullTrigger() override;
 
 private:
+	// Sound and effects
+	UPROPERTY(EditAnywhere)
+		UParticleSystem* ImpactEffect;
+
+	UPROPERTY(EditAnywhere)
+		USoundBase* ImpactSound;
+
 	// Line Trace function
 	bool GunTrace(FHitResult& Hit, FVector& ShotDirection);
 };

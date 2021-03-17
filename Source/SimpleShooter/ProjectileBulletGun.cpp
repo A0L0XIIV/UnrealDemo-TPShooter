@@ -17,8 +17,8 @@ void AProjectileBulletGun::PullTrigger()
 	Super::PullTrigger();
 	// Get ProjectileSpawnPoint Location && Rotation -> Spawn Projectile class at Location firing towards Rotation.
 	if (ProjectileClass) {
-		FVector SpawnLocation = ProjectileSpawnPoint->GetComponentLocation();
-		FRotator SpawnRotation = ProjectileSpawnPoint->GetComponentRotation();
+		/*FVector SpawnLocation = ProjectileSpawnPoint->GetComponentLocation();
+		FRotator SpawnRotation = ProjectileSpawnPoint->GetComponentRotation();*/
 
 		FVector Location;
 		FRotator Rotation;
@@ -26,10 +26,10 @@ void AProjectileBulletGun::PullTrigger()
 		AController* OwnerController = GetOwnerController();
 		if (OwnerController == nullptr) return;
 		OwnerController->GetPlayerViewPoint(Location, Rotation);
-		
-		FVector One(200, 200, 200);
-		Location += (One * Rotation.Vector());
+		// For spawning 2 meters infront of the player controller, otherwise player can see spawned projectiles.
+		Location += ((200, 200, 200) * Rotation.Vector());
 
+		// TODO: Somehow spawn bullets from SpawnPoint but change their target to player's aim
 		AProjectileBase* TempProjectile = GetWorld()->SpawnActor<AProjectileBase>(ProjectileClass, Location, Rotation);
 		TempProjectile->SetOwner(this);
 	}

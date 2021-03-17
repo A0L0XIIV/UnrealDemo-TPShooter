@@ -38,13 +38,11 @@ private:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement", meta = (AllowPrivateAccess = "true"))
 		float MovementSpeed = 5000.0f;
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Damage", meta = (AllowPrivateAccess = "true"))
-		float Damage = 50.0f;
+		float Damage = 35.0f;
 	UPROPERTY(EditAnywhere, Category = "Effects")
-		UParticleSystem* HitParticle;
+		UParticleSystem* ImpactEffect;
 	UPROPERTY(EditAnywhere, Category = "Sounds")
-		USoundBase* HitSound;
-	UPROPERTY(EditAnywhere, Category = "Sounds")
-		USoundBase* LaunchSound;
+		USoundBase* ImpactSound;
 	/*UPROPERTY(EditAnywhere, Category = "Effects")
 		TSubclassOf<UCameraShake> HitShake;*/
 

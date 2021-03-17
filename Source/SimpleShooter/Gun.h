@@ -38,12 +38,6 @@ protected:
 	UPROPERTY(EditAnywhere)
 		USoundBase* MuzzleSound;
 
-	UPROPERTY(EditAnywhere)
-		UParticleSystem* ImpactEffect;
-
-	UPROPERTY(EditAnywhere)
-		USoundBase* ImpactSound;
-
 	// Variables
 	UPROPERTY(EditAnywhere)
 		float MaxRange = 5000;
