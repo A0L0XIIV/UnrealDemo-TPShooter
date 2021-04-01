@@ -96,7 +96,7 @@ float AShooterCharacter::TakeDamage(float DamageAmount, FDamageEvent const& Dama
 	DamageToApply = FMath::Min(Health, DamageToApply);
 	// Decrease the health
 	Health -= DamageToApply;
-	UE_LOG(LogTemp, Warning, TEXT("Current Health: %f"), Health);
+	//UE_LOG(LogTemp, Warning, TEXT("Current Health: %f"), Health);
 
 	if (IsDead()) {		
 		// Get the game mode
